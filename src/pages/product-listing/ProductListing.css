@@ -1,20 +1,19 @@
-.page-header{
+.page-header {
     background-image: url('https://nest-frontend-v6.netlify.app/assets/imgs/blog/header-bg.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     border-radius: 1rem;
     padding: 70px 80px;
-
 }
 
-.page-header ul{
+.page-header ul {
     display: inline-block;
     list-style: none;
     padding: 0;
 }
 
-.page-header .category-tags{
+.page-header .category-tags {
     display: inline-block;
     background-color: white;
     border-radius: 20px;
@@ -23,19 +22,19 @@
     margin-left: 1rem;
 }
 
-.page-header .close-icon{
+.page-header .close-icon {
     margin-right: 5px;
     cursor: pointer;
 }
 
-.filter-card-title{
+.filter-card-title {
     position: relative;
     border-bottom: 1px solid #ececec;
     padding-bottom: 20px;
     font-size: 24px;
 }
 
-.filter-card-title::after{
+.filter-card-title::after {
     content: "";
     width: 80px;
     height: 2px;
@@ -45,31 +44,37 @@
     background-color: #BCE3C9;
 }
 
-.filter-card ul{
+.filter-card ul {
     display: block;
     padding: 0;
     list-style: none;
     margin-top: 20px;
 }
+.filter-card ul :hover{
+    background-color: #BCE3C9;
+}
 
-.filter-card li{
+.filter-card li {
     font-size: 16px;
     padding: .5rem 1rem;
-    border: 1px solid #ececec;
-    background-color: white;
+    border: 2px solid #ececec;
+    background-color: #ececec;
     margin-bottom: 10px;
     margin-top: 10px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.filter-card li{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: border-color 0.3s; /* Add transition for smooth border change */
 }
 
-.count{
+
+.filter-card li.selected {
+    border-color:  #d295c9; /* Change to desired border color */
+}
+
+.count {
     font-size: 12px;
     height: 25px;
     width: 25px;
@@ -80,7 +85,30 @@
     background-color: #BCE3C9;
 }
 
-.filter-card .icon{
+.filter-card .icon {
     height: 25px;
     margin-right: 7px;
+}
+
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: transparent;
+    border-radius: .25rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #6c757d;
+    content: ">";
+}
+
+.breadcrumb-item a {
+    color: #3BB77E !important;
 }

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import './ProductListing.css'
+import './ProductListing.css';
 import { Breadcrumb, Card, Col, Container, Row } from 'react-bootstrap';
 import Layout from '../layout/Layout';
 import { Close, Home } from '@mui/icons-material';
 
 const ProductListing = () => {
-
     const [selectedCategories, setSelectedCategories] = useState([1, 2, 3, 4, 5, 6]);
 
     const categories = [
@@ -13,35 +12,31 @@ const ProductListing = () => {
             category_id: 1, category_name: 'Mango', product_count: 5, icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
         },
         {
-            category_id: 2, category_name: 'Apple', product_count: 10,icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
+            category_id: 2, category_name: 'Apple', product_count: 10, icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
         },
         {
-            category_id: 3, category_name: 'Guava', product_count: 6,icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
+            category_id: 3, category_name: 'Guava', product_count: 6, icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
         },
         {
-            category_id: 4, category_name: 'Pineapple', product_count: 7,icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
+            category_id: 4, category_name: 'Pineapple', product_count: 7, icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
         },
         {
-            category_id: 5, category_name: 'Banana',product_count: 15,icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
+            category_id: 5, category_name: 'Banana', product_count: 15, icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
         },
         {
-            category_id: 6, category_name: 'Grapes', product_count: 25,icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
+            category_id: 6, category_name: 'Grapes', product_count: 25, icon: 'https://nest-frontend-v6.netlify.app/assets/imgs/theme/icons/category-1.svg'
         },
-    ]
+    ];
 
-    const setCategory = (category) =>{
-        if(selectedCategories.includes(category)){
-            setSelectedCategories(selectedCategories.filter(cat => cat !== category));
-        }
-    }
-
-    const setCategoryId = (id) =>{
-        if(selectedCategories.includes(id)){
-            setSelectedCategories(selectedCategories.filter(cat => cat !== id));
-        }else{
+    const setCategoryId = (id) => {
+        if (!selectedCategories.includes(id)) {
             setSelectedCategories([...selectedCategories, id]);
         }
-    }
+    };
+
+    const removeCategory = (id) => {
+        setSelectedCategories(selectedCategories.filter(cat => cat !== id));
+    };
 
     return (
         <Layout>
@@ -53,18 +48,20 @@ const ProductListing = () => {
                             <Breadcrumb>
                                 <Breadcrumb.Item href="#"><Home /> Home</Breadcrumb.Item>
                                 <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-                                    Library
+                                    Shop
                                 </Breadcrumb.Item>
-                                <Breadcrumb.Item active>Data</Breadcrumb.Item>
+                                <Breadcrumb.Item active>Snacks</Breadcrumb.Item>
                             </Breadcrumb>
                         </Col>
                         <Col lg={9} className='text-end d-none d-lg-block'>
                             <ul>
-                                {selectedCategories.map((category)=>{
-                                    return <li className='category-tags shadow'>
-                                        <span onClick={()=>setCategory(category)} className='close-icon'><Close fontSize={'small'} /></span>
-                                        <span>{categories.find(cat => cat.category_id === category).category_name}</span>
-                                    </li>
+                                {selectedCategories.map((category) => {
+                                    return (
+                                        <li className='category-tags shadow' key={category}>
+                                            <span onClick={() => removeCategory(category)} className='close-icon'><Close fontSize={'small'} /></span>
+                                            <span>{categories.find(cat => cat.category_id === category).category_name}</span>
+                                        </li>
+                                    );
                                 })}
                             </ul>
                         </Col>
@@ -79,12 +76,21 @@ const ProductListing = () => {
                             <h5 className='my-0 filter-card-title'>Category</h5>
 
                             <ul>
-                                {categories.map((category)=>{
-                                    return <li className='category-list' onClick={()=>setCategoryId(category.category_id)}>
-                                        <span className='d-flex align-items-center'> <img className='icon' src={category.icon} alt={category.category_name + ' icon'} /> <span>{category.category_name}</span></span>
-                                        
-                                        <span className='count'>{category.product_count}</span>
-                                    </li>
+                                {categories.map((category) => {
+                                    const isSelected = selectedCategories.includes(category.category_id);
+                                    return (
+                                        <li 
+                                            key={category.category_id} 
+                                            className={`category-list ${isSelected ? 'selected' : ''}`} 
+                                            onClick={() => setCategoryId(category.category_id)}
+                                        >
+                                            <span className='d-flex align-items-center'> 
+                                                <img className='icon' src={category.icon} alt={category.category_name + ' icon'} /> 
+                                                <span>{category.category_name}</span>
+                                            </span>
+                                            <span className='count'>{category.product_count}</span>
+                                        </li>
+                                    );
                                 })}
                             </ul>
                         </Card>
@@ -93,7 +99,7 @@ const ProductListing = () => {
                 </Row>
             </Container>
         </Layout>
-    )
+    );
 }
 
-export default ProductListing
+export default ProductListing;
